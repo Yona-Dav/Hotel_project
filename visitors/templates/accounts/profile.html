@@ -1,0 +1,41 @@
+{% extends 'partials/base.html'%}
+{%block content%}
+<div class="container">
+ <div class="row">
+{% if request.user.is_authenticated %}
+<div class="card " style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">My profile</h5>
+    <p class="card-text">Username: {{request.user.username}}</p>
+    <p class="card-text">First Name: {{request.user.first_name}}</p>
+    <p class="card-text">Last Name: {{request.user.last_name}}</p>
+    <p class="card-text">Email: {{request.user.email}}</p>
+    <p  class="card-text">Phone Number: {{request.user.profile.phone}}</p>
+    <p  class="card-text">Address: {{request.user.profile.address}}</p>
+  </div>
+</div>
+  {% for book in user.booking_set.all%}
+ <div class="card ms-3 " style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">My Reservation</h5>
+    <p class="card-text">Start Date: {{book.start_date}}</p>
+    <p class="card-text">End Date: {{book.end_date}}</p>
+    <p class="card-text">Number people: {{book.number_people}}</p>
+    <p class="card-text">Room Type: {{book.room.room_type}}</p>
+  </div>
+</div>
+  {%endfor%}
+     {% for review in user.review_set.all%}
+ <div class="card ms-3 " style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">My Reviews</h5>
+    <p class="card-text">Title: {{review.title}}</p>
+    <p class="card-text">{{review.message}}</p>
+    <p class="card-text">since {{review.timestamp | timesince}}</p>
+  </div>
+</div>
+  {%endfor%}
+{%endif%}
+</div>
+  </div>
+{% endblock %}

@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!--    contain this   -->
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Hotel Torquay</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}">Homepage</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="{% url 'details_room_type'%}">View Rooms</a>
+        </li>
+        <li class="nav-item">
+            {% if not user.is_staff%}
+          <a class="nav-link" href="{% url 'booking'%}">Make Booking</a>
+            {%else%}
+            <a class="nav-link" href="{% url 'make_booking' %}">Make Booking</a>
+            {%endif%}
+        </li>
+         <li class="nav-item">
+             {% if not user.is_staff%}
+          <a class="nav-link" href="{%url 'contact' %}">Info Request</a>
+             {%else%}
+             <a class="nav-link" href="{%url 'list_request' %}">Info Request</a>
+             {%endif%}
+        </li>
+          <li class="nav-item">
+           {% if not user.is_staff%}
+          <a class="nav-link" href="{%url 'review' %}">Leave a review</a>
+              {%endif%}
+        </li>
+          <li class="nav-item">
+           {% if user.is_staff%}
+          <a class="nav-link" href="{%url 'list_bookings' %}">All Bookings</a>
+              {%endif%}
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'all_reviews' %}">Reviews</a>
+        </li>
+        <li class="nav-item">
+            {% if user.is_authenticated %}
+          <a class="nav-link" href="{% url 'profile' user.id %}">Profile</a>
+            {% endif%}
+        </li>
+      </ul>
+    </div>
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    {%if not user.is_authenticated %}
+        <li class="nav-item">
+
+          <a href="{% url 'login' %}" class="nav-link ">Login</a>
+        </li>
+            <li class="nav-item">
+          <a href="{% url 'signup' %}" class="nav-link ">Sign Up</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link ">Login in as <b>{{user.username}}</b></a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'logout' %}" class="nav-link ">Logout</a>
+        </li>
+        {% endif %}
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,22 @@
+{% extends 'partials/base.html'%}
+{% block content%}
+<div class="container">
+<h1 class="pt-3 ps-3">All the room type</h1>
+<div class="row">
+{%for room in roomstype%}
+
+    <div class="card mb-5 " style="width: 25rem;">
+        <img src="{{room.image}}" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">{{room.name}}</h5>
+            <p class="card-text">{{room.details}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Price per person per day : {{room.cost}}</li>
+            <li class="list-group-item">Capacity: {{room.max_people}} people</li>
+        </ul>
+    </div>
+    {%endfor%}
+</div>
+</div>
+{%endblock%}

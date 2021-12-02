@@ -1,0 +1,20 @@
+{% extends 'partials/base.html' %}
+{% load bootstrap5 %}
+{% block title %}
+{{item_type}} | Create
+{% endblock %}
+
+{% block content %}
+{%if messages%}
+{%for message in messages%}
+<div class="alert alert-warning">{{message}}<br></div>
+{%endfor%}
+{%endif%}
+    <h1>Welcome</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button "Save" button_type="submit" button_class="btn-success" %}
+    </form>
+{% endblock %}

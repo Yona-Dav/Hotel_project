@@ -1,0 +1,26 @@
+{% extends 'partials/base.html'%}
+{%block content%}
+<div class="row">
+
+  {% if single_book%}
+        <h2>Reservation {{single_book.id}}</h2>
+ <div class="card ms-3 " style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Reservation by {{single_book.user.username}}</h5>
+    <p class="card-text">Start Date: {{single_book.start_date}}</p>
+    <p class="card-text">End Date: {{single_book.end_date}}</p>
+    <p class="card-text">Number people: {{single_book.number_people}}</p>
+    <p class="card-text">Room Type: {{single_book.room.room_type}}</p>
+    <p class="card-text">Room Type: {{single_book.room.room_number}}</p>
+
+    <a href="{%url 'delete' single_book.id%}" class="card-link">Delete</a>
+
+    <a href="{%url 'update_booking' single_book.id%}" class="card-link">Update</a>
+
+  </div>
+ </div>
+    <a href="{% url 'list_bookings' %}">All the reservations</a>
+ </div>
+{%endif%}
+
+{%endblock%}

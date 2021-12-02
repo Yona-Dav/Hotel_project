@@ -1,0 +1,6 @@
+{% extends 'partials/base.html'%}
+{% block content%}
+<h2>There are too many people for this room</h2>
+<h2>For this {{room.room_type.name}} room, the capacity is maximum {{room.room_type.max_people}} people</h2>
+<a href="{% url 'booking' %}" class="btn btn-success">change the number of people or choose an other room?</a>
+{%endblock%}

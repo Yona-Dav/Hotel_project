@@ -1,0 +1,33 @@
+{% load static %}
+{% load bootstrap5 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Hotel Torquay {% block title %}{% endblock %}</title>
+
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'visitors/css/style.css' %}" type="text/css" >
+    {% bootstrap_javascript %}
+
+    {% block css %}
+
+    {% endblock %}
+</head>
+<body>
+{% include 'partials/navbar.html' %}
+
+<div class="container my-4" id="content-container">
+{% block content %}
+
+{% endblock %}
+</div>
+
+{% include 'partials/footer.html' %}
+{% block js %}
+
+{% endblock %}
+</body>
+</html>
