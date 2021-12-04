@@ -9,17 +9,18 @@
     <title>Hotel Torquay {% block title %}{% endblock %}</title>
 
     {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'visitors/css/style.css' %}" type="text/css" >
+    <link rel="stylesheet" href="{% static 'visitors/css/styles.css' %}" type="text/css" >
     {% bootstrap_javascript %}
 
     {% block css %}
 
     {% endblock %}
+
 </head>
 <body>
 {% include 'partials/navbar.html' %}
 
-<div class="container my-4" id="content-container">
+<div class="mt-3">
 {% block content %}
 
 {% endblock %}

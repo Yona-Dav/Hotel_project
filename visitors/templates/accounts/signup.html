@@ -6,12 +6,12 @@ Login
 
 {% block content %}
 <div class="container me-5 ms-5 ">
-    <h1 class="d-flex justify-content-center">Welcome to the Login page</h1>
+    <h1 class="d-flex justify-content-center">Sign Up</h1>
 
-    <form method="post">
+    <form method="post" class="d-flex flex-column ">
         {% csrf_token %}
         {% bootstrap_form form %}
-        {% bootstrap_button "Login" button_type="submit" button_class="btn-success" %}
+        {% bootstrap_button "Sign Up" button_type="submit" button_class="btn-success" %}
     </form>
 </div>
 {% endblock %}

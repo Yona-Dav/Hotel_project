@@ -7,7 +7,6 @@ from .forms import SignupForm, MyAuthenticationForm, BookingForm, ReviewForm, Ge
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import user_passes_test
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from datetime import datetime
@@ -28,7 +27,7 @@ class Signup(CreateView):
     model = User
     form_class = SignupForm
     success_url = reverse_lazy('update_profile')
-    template_name = 'partials/create.html'
+    template_name = 'accounts/signup.html'
     extra_context = {'item_type': 'User', 'form_type': 'Create'}
 
     def form_valid(self, form):
@@ -68,7 +67,7 @@ class RoomTypeListView(ListView):
 
 
 class BookingCreateView(LoginRequiredMixin, CreateView):
-    template_name = 'partials/create.html'
+    template_name = 'booking.html'
     success_url = reverse_lazy('homepage')
     model = Booking
     form_class = BookingForm
@@ -80,14 +79,8 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
         room = form.cleaned_data['room']
         number_people = form.cleaned_data['number_people']
 
-        not_available1 = Booking.objects.filter(start_date__lte=start, end_date__gte=end)
-        not_available2 = Booking.objects.filter(start_date__lte=end, end_date__gte=end)
-        not_available3 = Booking.objects.filter(start_date__gte=start, end_date__lte=end)
-        not_available4 = Booking.objects.filter(end_date__gte=start, end_date__lte=end)
-        avail_rooms = Room.objects.exclude(booking__in=not_available1).exclude(booking__in=not_available2).exclude(
-            booking__in=not_available3).exclude(booking__in=not_available4)
-        print(avail_rooms)
-        print(room)
+        not_available = Booking.objects.filter(Q(start_date__lte=start, end_date__gte=end) | Q(start_date__lte=end, end_date__gte=end) | Q(start_date__gte=start, end_date__lte=end) | Q(end_date__gte=start, end_date__lte=end))
+        avail_rooms = Room.objects.exclude(booking__in=not_available)
         if room in avail_rooms:
             if number_people < (room.room_type.max_people + 1):
                 self.object.user = self.request.user
@@ -101,7 +94,7 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 
 
 class ReviewCreateView(LoginRequiredMixin, CreateView):
-    template_name = 'partials/create.html'
+    template_name = 'new_review.html'
     success_url = reverse_lazy('homepage')
     model = Review
     form_class = ReviewForm
@@ -113,7 +106,7 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
 class GetContactCreateView(CreateView):
-    template_name = 'partials/create.html'
+    template_name = 'new_request.html'
     model = GetContact
     form_class = GetContactForm
 
@@ -147,14 +140,8 @@ class StaffBookingCreateView(UserPassesTestMixin,CreateView):
         room = form.cleaned_data['room']
         number_people = form.cleaned_data['number_people']
 
-        not_available1 = Booking.objects.filter(start_date__lte=start, end_date__gte=end)
-        not_available2 = Booking.objects.filter(start_date__lte=end, end_date__gte=end)
-        not_available3 = Booking.objects.filter(start_date__gte=start, end_date__lte=end)
-        not_available4 = Booking.objects.filter(end_date__gte=start, end_date__lte=end)
-        avail_rooms = Room.objects.exclude(booking__in=not_available1).exclude(booking__in=not_available2).exclude(
-            booking__in=not_available3).exclude(booking__in=not_available4)
-        print(avail_rooms)
-        print(room)
+        not_available = Booking.objects.filter(Q(start_date__lte=start, end_date__gte=end) | Q(start_date__lte=end, end_date__gte=end) | Q(start_date__gte=start, end_date__lte=end) | Q(end_date__gte=start, end_date__lte=end))
+        avail_rooms = Room.objects.exclude(booking__in=not_available)
         if room in avail_rooms:
             if number_people < (room.room_type.max_people + 1):
                 self.object = form.save()

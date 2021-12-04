@@ -1,9 +1,10 @@
 {% extends 'partials/base.html'%}
 {% block content%}
 <div class="container">
-<h1 class="pt-3 ps-3">All the room type</h1>
-<div class="row">
+<h1 class="pt-3 ps-3 d-flex justify-content-center">Our different rooms</h1>
+<div class="row d-flex justify-content-evenly">
 {%for room in roomstype%}
+
 
     <div class="card mb-5 " style="width: 25rem;">
         <img src="{{room.image}}" class="card-img-top">
@@ -17,6 +18,9 @@
         </ul>
     </div>
     {%endfor%}
+     <a href="{% url 'booking' %}" class="btn btn-warning d-flex justify-content-center">Make Booking</a>
+
 </div>
 </div>
+
 {%endblock%}

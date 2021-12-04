@@ -3,15 +3,11 @@
 {% block title %}
 {{item_type}} | Create
 {% endblock %}
-
-{% block content %}
-{%if messages%}
-{%for message in messages%}
-<div class="alert alert-warning">{{message}}<br></div>
-{%endfor%}
-{%endif%}
+{%block content%}
 <div class="container me-5 ms-5">
-    <h1 class="d-flex justify-content-center">Welcome to Hotel Torquay</h1>
+    <h1 class="d-flex justify-content-center">Make Booking</h1>
+
+<div class="container">
 
     <form method="post">
         {% csrf_token %}

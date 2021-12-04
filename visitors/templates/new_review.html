@@ -11,12 +11,12 @@
 {%endfor%}
 {%endif%}
 <div class="container me-5 ms-5">
-    <h1 class="d-flex justify-content-center">Welcome to Hotel Torquay</h1>
+    <h1 class="d-flex justify-content-center">Leave a review</h1>
 
     <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        {% bootstrap_button "Save" button_type="submit" button_class="btn-success" %}
+        {% bootstrap_button "Leave A Review" button_type="submit" button_class="btn-success" %}
     </form>
 </div>
 {% endblock %}

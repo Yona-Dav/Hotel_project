@@ -1,18 +1,20 @@
 {% extends 'partials/base.html'%}
 {% block content%}
 <div class="container">
-<h1 class="pt-3 ps-3">All the reviews</h1>
+<h1 class="pt-3 ps-3">Reviews</h1>
 <div class="row">
 {%for rev in reviews%}
-<div class="card">
-  <div class="card-body">
-    <p>{{rev.title}} by {{rev.user.username}} since {{rev.timestamp | timesince }}</p>
-      {{rev.message}}
-      {% if user.is_staff%}
-      <a href="{%url 'delete_reviews' rev.id%}">Delete</a>
-      {%endif%}
-  </div>
-</div>
+<figure>
+  <blockquote class="blockquote">
+    <p>{{rev.title}}: {{rev.message}} </p>
+  </blockquote>
+  <figcaption class="blockquote-footer">
+    since {{rev.timestamp | timesince }} by <cite title="Source Title">{{rev.user.username}}</cite>
+  </figcaption>
+  {% if user.is_staff%}
+  <a href="{%url 'delete_reviews' rev.id%}">Delete</a>
+  {%endif%}
+</figure>
     {%endfor%}
 </div>
 </div>

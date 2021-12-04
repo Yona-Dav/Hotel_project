@@ -1,17 +1,16 @@
 {% extends 'partials/base.html'%}
 {% block content%}
 <div class="container">
-<h1 class="pt-3 ps-3">All the requests</h1>
-<div class="row">
+<h1 class="pt-3 ps-3 d-flex justify-content-center">All the requests</h1>
+<div class="row d-flex justify-content-center">
 {%for req in requests%}
-
-    <div class="card mb-5 " style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Request by {{req.name}}</h5>
-            <p class="card-text">Email: <a href = "mailto: {{req.email}}">{{req.email}}</a></p>
-            <p class="card-text">Request: {{req.request}}</p>
-        </div>
-    </div>
+<div class="card">
+  <div class="card-body">
+      <h5 class="card-title">Request by {{req.name}}</h5>
+      <p class="card-text">Email: <a href = "mailto: {{req.email}}">{{req.email}}</a></p>
+      <p class="card-text">{{req.request}}</p>
+  </div>
+</div>
     {%endfor%}
 </div>
 </div>

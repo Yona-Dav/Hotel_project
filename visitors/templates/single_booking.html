@@ -1,9 +1,9 @@
 {% extends 'partials/base.html'%}
 {%block content%}
-<div class="row">
+<div class="row me-5 ms-5">
 
   {% if single_book%}
-        <h2>Reservation {{single_book.id}}</h2>
+        <h2 >Reservation {{single_book.id}}</h2>
  <div class="card ms-3 " style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">Reservation by {{single_book.user.username}}</h5>
